@@ -79,28 +79,34 @@ The bot will also automatically update its status to show the number of players 
 
 ## Build from source
 
-1. Clone the repository
 
-```bash
-git clone https://github.com/The-Noah/minebot.git
+ Create a `.env` file in the root of the project and add the following:
+
+```env
+DISCORD_TOKEN=your_discord_bot_token
+GUILD_ID=your_discord_guild_id
+MINECRAFT_IP=your_minecraft_server_ip
+RCON_PASSWORD=your_rcon_password
+```
+#### optional
+```env
+RCON_PORT=your_rcon_port (default: 25575)
 ```
 
-2. Build bot
+### Use docker compose
+
+run ```docker compose up``` 
+
+### Build manually
+
+1. Build bot
 
 ```bash
 cd minebot
 cargo build --release
 ```
 
-3. Create a `.env` file in the root of the project and add the following:
-
-```env
-DISCORD_TOKEN=your_discord_bot_token
-GUILD_ID=your_discord_guild_id
-MINECRAFT_IP=your_minecraft_server_ip
-```
-
-4. Run the bot
+2. Run the bot
 
 ```bash
 ./target/release/minebot
