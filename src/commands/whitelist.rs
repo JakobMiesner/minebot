@@ -1,6 +1,5 @@
-use once_cell::sync::Lazy;
 use regex::Regex;
-use serenity::all::{CreateCommandOption, Permissions};
+use serenity::all::CreateCommandOption;
 use serenity::builder::CreateCommand;
 use serenity::model::application::{ResolvedOption, ResolvedValue};
 
@@ -57,7 +56,6 @@ pub async fn run<'a>(options: &'a [ResolvedOption<'a>]) -> String {
 pub fn register() -> CreateCommand {
   CreateCommand::new("whitelist")
     .description("Manage the whitelist")
-    .default_member_permissions(Permissions::ADMINISTRATOR)
     .add_option(
       CreateCommandOption::new(serenity::all::CommandOptionType::SubCommand, "add", "Add a player to the whitelist")
         .add_sub_option(CreateCommandOption::new(serenity::all::CommandOptionType::String, "username", "Minecraft username").required(true)),

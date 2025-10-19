@@ -87,6 +87,7 @@ DISCORD_TOKEN=your_discord_bot_token
 GUILD_ID=your_discord_guild_id
 MINECRAFT_IP=your_minecraft_server_ip
 RCON_PASSWORD=your_rcon_password
+ALLOWED_ROLE_IDS=comma_separated_role_ids_with_access (e.g. "123456789012345678,987654321098765432")
 ```
 #### optional
 ```env

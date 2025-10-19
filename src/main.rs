@@ -11,6 +11,7 @@ use serenity::{
 
 mod commands;
 mod minecraft;
+mod permissions;
 
 struct Handler;
 
@@ -47,7 +48,7 @@ impl EventHandler for Handler {
     tokio::spawn(async move {
       let mut last_player_count = usize::max_value();
 
-      let mut interval = tokio::time::interval(std::time::Duration::from_secs(5));
+      let mut interval = tokio::time::interval(std::time::Duration::from_secs(15));
 
       loop {
         let players = minecraft::get_players().await;
@@ -68,6 +69,20 @@ impl EventHandler for Handler {
   async fn interaction_create(&self, ctx: Context, interaction: Interaction) {
     if let Interaction::Command(command) = interaction {
       println!("Command: {command:#?}");
+
+      // Check permissions for commands that require them
+      if permissions::requires_permission(&command.data.name) {
+        if !permissions::has_permission(&command).await {
+          let data =
+            CreateInteractionResponseMessage::new().content("You don't have permission to use this command. You need to be an administrator or have one of the allowed roles.");
+          let builder = CreateInteractionResponse::Message(data);
+
+          if let Err(why) = command.create_response(&ctx.http, builder).await {
+            println!("Error sending response: {:?}", why);
+          }
+          return;
+        }
+      }
 
       let content = match command.data.name.as_str() {
         "ping" => Some(commands::ping::run(&command.data.options())),

@@ -2,6 +2,7 @@ services:
   minebot:
     build: ./
     container_name: minebot
+    restart: unless-stopped
     env_file:
       - .env
       # should have
@@ -9,6 +10,7 @@ services:
       # - GUILD_ID
       # - MINECRAFT_IP
       # - RCON_PASSWORD
+      # - ALLOWED_ROLE_IDS
 
       # optional
       # - RCON_PORT
