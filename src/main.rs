@@ -38,8 +38,6 @@ impl EventHandler for Handler {
       )
       .await;
 
-    println!("Commands: {commands:#?}");
-
     if let Err(why) = commands {
       println!("Error setting commands: {:?}", why);
     }
