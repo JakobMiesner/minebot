@@ -1,0 +1,14 @@
+services:
+  minebot:
+    build: ./
+    container_name: minebot
+    env_file:
+      - .env
+      # should have
+      # - DISCORD_TOKEN
+      # - GUILD_ID
+      # - MINECRAFT_IP
+      # - RCON_PASSWORD
+
+      # optional
+      # - RCON_PORT
